@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,14 +11,18 @@ using UnityEngine.AI;
 public class GNavMovement : MonoBehaviour
 {
     private NavMeshAgent _navMeshAgent;
+    private GEntity _entity;
+    private IEnumerator _movingEnum;
     
-    [SerializeField, ReadOnly]
-    private bool _isMoving;
-    
-    public void MoveTo(Vector3 targetPosition)
+    public void MoveTo(Vector3 targetPosition, Action onComplete = null)
     {
         if (_navMeshAgent.SetDestination(targetPosition)) {
-            _isMoving = true;
+            if (_movingEnum != null)
+            {
+                StopCoroutine(_movingEnum);
+            }
+            _movingEnum = MovementCoroutine(onComplete);
+            StartCoroutine(_movingEnum);
             Debug.Log($"{gameObject.name} Moving to position: " + targetPosition);
         } else {
             Debug.LogWarning($"Failed to set destination to {targetPosition} in {gameObject.name}");
@@ -26,14 +32,15 @@ public class GNavMovement : MonoBehaviour
     private void Awake()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _entity = GetComponent<GEntity>();
     }
-    
-    private void Update()
+
+    IEnumerator MovementCoroutine(Action onComplete = null)
     {
-        if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance && !_navMeshAgent.pathPending && _isMoving)  
-        {
-            Debug.Log($"{gameObject.name} Reached destination");
-            _isMoving = false;
-        }
+        yield return new WaitUntil(() => _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance && !_navMeshAgent.pathPending);
+        Debug.Log($"{gameObject.name} Reached destination");
+        _entity.ChangeState(GEntity.EEntityState.Passive);
+        onComplete?.Invoke();
+        _movingEnum = null;
     }
 }

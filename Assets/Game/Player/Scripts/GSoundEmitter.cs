@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -9,16 +10,16 @@ public class GSoundEmitter : MonoBehaviour
 {
     private const float _gizmosOffsetHeight = .01f;
     
-    [SerializeField] private float _bellRange;
-    [SerializeField] private LayerMask _bellDetectionMask;
-    [SerializeField] private bool _isGizmosActive = true;
-    [SerializeField] private int _gizmosCircleResolution;
-    [FormerlySerializedAs("_gizmosAnimDuration")] [SerializeField] private float _bellTickDuration;
-    [SerializeField] private AnimationCurve _gizmosAnimCurve;
-    private float _gizmosAnimRadius;
-    private Vector3[] _gizmosCircleArraySize;
+    [SerializeField, BoxGroup("Bell Effect")] private float _bellRange;
+    [SerializeField, BoxGroup("Bell Effect")] private float _bellTickDuration;
+    [SerializeField, BoxGroup("GIZMOS")] private bool _isGizmosActive = true;
+    [SerializeField, BoxGroup("GIZMOS")] private int _gizmosCircleResolution;
+    [SerializeField, BoxGroup("GIZMOS")] private AnimationCurve _gizmosAnimCurve;
+    
     private IEnumerator _bellEnum;
     private bool _isBellActive;
+    private float _gizmosAnimRadius;
+    private Vector3[] _gizmosCircleArraySize;
     
     public void OnBellStarted()
     {
@@ -29,18 +30,7 @@ public class GSoundEmitter : MonoBehaviour
         _bellEnum = BellGizmosCoroutine();
         StartCoroutine(_bellEnum);
     }
-
-    public void BellTick()
-    {
-        GSoundListener[] _listeners = GEntityManager.Instance.listeningAgents.Where(a=>
-            (Vector3.Distance(transform.position, a.transform.position)) < _bellRange).ToArray();
-        
-        for (int i = 0; i < _listeners.Length; i++)
-        {
-            _listeners[i].HearSound(transform.position);
-        }
-    }
-
+    
     public void OnBellReleased()
     {
         _isBellActive = false;
@@ -84,6 +74,21 @@ public class GSoundEmitter : MonoBehaviour
         }
     }
 
+    private void BellTick()
+    {
+        GEntity[] nearEntities = GEntityManager.Instance.agents.Where(a=>
+             a._currentState != GEntity.EEntityState.InInventory &&
+             Vector3.Distance(transform.position, a.transform.position) < _bellRange).ToArray();
+        
+        for (int i = 0; i < nearEntities.Length; i++)
+        {
+            if (nearEntities[i].TryGetComponent(out GSoundListener listener))
+            {
+                listener.HearSound(transform.position);
+            }
+        }
+    }
+    
     IEnumerator BellGizmosCoroutine()
     {
         _isBellActive = true;

@@ -6,19 +6,15 @@ using UnityEngine.Events;
 // Class to handle hearing capabilities for a game entity 
 public class GSoundListener : MonoBehaviour
 {
-    public UnityEvent<Vector3> onSoundHeard;
+    public UnityEvent<Vector3, Action> onSoundHeard;
+    private GEntity _entity;
     
     // To Call For Transmit a Sound 
     public void HearSound(Vector3 soundPosition)
     {
         Debug.Log("Sound Heard at position: " + soundPosition);
-        
-        onSoundHeard?.Invoke(soundPosition);
-    }
-
-    private void Start()
-    {
-        GEntityManager.Instance.RegisterEntity(this);
+        onSoundHeard?.Invoke(soundPosition, OnMovementComplete);
+        _entity.ChangeState(GEntity.EEntityState.Charmed);
     }
 
     // Debugging method to simulate hearing a sound at a specific position 
@@ -26,6 +22,16 @@ public class GSoundListener : MonoBehaviour
     private void DebugSimulateSound(Vector3 soundPosition)
     {
         HearSound(soundPosition);
+    }
+
+    private void OnMovementComplete()
+    {
+        _entity.ChangeState(GEntity.EEntityState.Passive);
+    }
+    
+    private void Start()
+    {
+        _entity = GetComponent<GEntity>();
     }
 }
 
