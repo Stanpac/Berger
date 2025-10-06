@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 // Class to handle hearing capabilities for a game entity 
-public class GHearing : MonoBehaviour
+public class GSoundListener : MonoBehaviour
 {
     public UnityEvent<Vector3> onSoundHeard;
     
@@ -15,7 +15,12 @@ public class GHearing : MonoBehaviour
         
         onSoundHeard?.Invoke(soundPosition);
     }
-    
+
+    private void Start()
+    {
+        GEntityManager.Instance.RegisterEntity(this);
+    }
+
     // Debugging method to simulate hearing a sound at a specific position 
     [Button]
     private void DebugSimulateSound(Vector3 soundPosition)

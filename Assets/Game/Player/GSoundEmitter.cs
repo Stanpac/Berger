@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -11,36 +13,41 @@ public class GSoundEmitter : MonoBehaviour
     [SerializeField] private LayerMask _bellDetectionMask;
     [SerializeField] private bool _isGizmosActive = true;
     [SerializeField] private int _gizmosCircleResolution;
-    [SerializeField] private float _gizmosAnimDuration;
+    [FormerlySerializedAs("_gizmosAnimDuration")] [SerializeField] private float _bellTickDuration;
     [SerializeField] private AnimationCurve _gizmosAnimCurve;
     private float _gizmosAnimRadius;
     private Vector3[] _gizmosCircleArraySize;
-    private Collider[] _bellDetectionArray;
-    private const int _bellDetectionArraySize = 100;
-    private IEnumerator _bellGizmosEnum;
+    private IEnumerator _bellEnum;
+    private bool _isBellActive;
     
-    public void OnTriggerBell()
+    public void OnBellStarted()
     {
-        if (_bellGizmosEnum != null)
+        if (_bellEnum != null)
         {
-            StopCoroutine(_bellGizmosEnum);
+            StopCoroutine(_bellEnum);
         }
-        _bellGizmosEnum = BellGizmosCoroutine();
-        StartCoroutine(_bellGizmosEnum);
+        _bellEnum = BellGizmosCoroutine();
+        StartCoroutine(_bellEnum);
+    }
+
+    public void BellTick()
+    {
+        GSoundListener[] _listeners = GEntityManager.Instance.listeningAgents.Where(a=>
+            (Vector3.Distance(transform.position, a.transform.position)) < _bellRange).ToArray();
         
-         int numOfDetected = Physics.OverlapSphereNonAlloc(transform.position, _bellRange, _bellDetectionArray, _bellDetectionMask, QueryTriggerInteraction.Ignore);
-         for (int i = 0; i < numOfDetected; i++)
-         {
-             if (_bellDetectionArray[i].TryGetComponent<GHearing>(out GHearing hearingAgent))
-             {
-                 hearingAgent.HearSound(transform.position);
-             }
-         }
+        for (int i = 0; i < _listeners.Length; i++)
+        {
+            _listeners[i].HearSound(transform.position);
+        }
+    }
+
+    public void OnBellReleased()
+    {
+        _isBellActive = false;
     }
 
     private void Start()
     {
-        _bellDetectionArray = new Collider[_bellDetectionArraySize];
         _gizmosCircleArraySize = new Vector3[_gizmosCircleResolution];
     }
 
@@ -60,7 +67,7 @@ public class GSoundEmitter : MonoBehaviour
             Gizmos.DrawLineStrip(_gizmosCircleArraySize, true);
         }
 
-        if (_isGizmosActive && _gizmosCircleArraySize != null && _bellGizmosEnum != null && _gizmosCircleArraySize.Length > 0)
+        if (_isGizmosActive && _gizmosCircleArraySize != null && _bellEnum != null && _gizmosCircleArraySize.Length > 0)
         {
             float angleStep = 360f / (_gizmosCircleResolution);
             for (int i = 0; i < _gizmosCircleResolution; i++)
@@ -79,14 +86,20 @@ public class GSoundEmitter : MonoBehaviour
 
     IEnumerator BellGizmosCoroutine()
     {
-        float i = 0;
-        while (i < 1)
+        _isBellActive = true;
+        while (_isBellActive)
         {
-            i += Time.deltaTime / _gizmosAnimDuration;
-            _gizmosAnimRadius = _bellRange * _gizmosAnimCurve.Evaluate(i);
+            BellTick();
+            float i = 0;
+            while (i < 1)
+            {
+                i += Time.deltaTime / _bellTickDuration;
+                _gizmosAnimRadius = _bellRange * _gizmosAnimCurve.Evaluate(i);
+                yield return null;
+            }
+
             yield return null;
         }
-
-        _bellGizmosEnum = null;
+        _bellEnum = null;
     }
 }
