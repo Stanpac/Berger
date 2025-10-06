@@ -5,12 +5,12 @@ using UnityEngine.InputSystem;
 public class GPlayerInputReceiver : MonoBehaviour
 {
     private GPlayerMovement _playerMovement;
-    private GBell _bell;
+    private GSoundEmitter _soundEmitter;
     
     public void OnTriggerBell()
     {
-        if (_bell == null) return;
-        _bell.OnTriggerBell();
+        if (_soundEmitter == null) return;
+        _soundEmitter.OnTriggerBell();
     }
 
     public void OnMove(InputValue cbx)
@@ -35,6 +35,6 @@ public class GPlayerInputReceiver : MonoBehaviour
     private void Start()
     {
         _playerMovement = GetComponent<GPlayerMovement>();
-        _bell = GetComponent<GBell>();
+        _soundEmitter = GetComponent<GSoundEmitter>();
     }
 }

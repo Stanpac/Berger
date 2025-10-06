@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class GBell : MonoBehaviour
+public class GSoundEmitter : MonoBehaviour
 {
-    private const float _gizmosOffsetHeight = .5f;
+    private const float _gizmosOffsetHeight = .01f;
     
     [SerializeField] private float _bellRange;
     [SerializeField] private LayerMask _bellDetectionMask;
@@ -31,10 +31,9 @@ public class GBell : MonoBehaviour
          int numOfDetected = Physics.OverlapSphereNonAlloc(transform.position, _bellRange, _bellDetectionArray, _bellDetectionMask, QueryTriggerInteraction.Ignore);
          for (int i = 0; i < numOfDetected; i++)
          {
-             if (_bellDetectionArray[i].TryGetComponent<GBell>(out GBell bell))
+             if (_bellDetectionArray[i].TryGetComponent<GHearing>(out GHearing hearingAgent))
              {
-                 // Call Callback
-
+                 hearingAgent.HearSound(transform.position);
              }
          }
     }
