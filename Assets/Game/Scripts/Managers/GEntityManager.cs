@@ -1,34 +1,47 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class GEntityManager : GSingleton<GEntityManager>
 {
-    public List<GSoundListener> listeningAgents {get; private set;}
+    public List<GEntity> agents {get; private set;}
 
+    [SerializeField] private float _agentsDetectionRange;
+    
     protected override void Awake()
     {
         base.Awake();
-        listeningAgents = new List<GSoundListener>();
+        agents = new List<GEntity>();
     }
 
-    public void RegisterEntity(GSoundListener soundListenerAgent)
+    public void RegisterEntity(GEntity agent)
     {
-        if (listeningAgents.Contains(soundListenerAgent))
+        if (agents.Contains(agent))
         {
-            Debug.LogError("Trying to register an entity that is already registered", soundListenerAgent);
+            Debug.LogError("Trying to register an entity that is already registered", agent);
             return;
         }
-        listeningAgents.Add(soundListenerAgent);
+        agents.Add(agent);
     }
 
-    public void UnregisterEntity(GSoundListener soundListenerAgent)
+    public void UnregisterEntity(GEntity agent)
     {
-        if (!listeningAgents.Contains(soundListenerAgent))
+        if (!agents.Contains(agent))
         {
-            Debug.LogError("Trying to unregister an entity that is not registered", soundListenerAgent);
+            Debug.LogError("Trying to unregister an entity that is not registered", agent);
             return;
         }
-        listeningAgents.Remove(soundListenerAgent);
+        agents.Remove(agent);
+    }
+
+    private void Update()
+    {
+        GEntity[] _listeners = GEntityManager.Instance.agents.Where(a=>
+            (Vector3.Distance(transform.position, a.transform.position)) < _agentsDetectionRange).ToArray();
+        
+        for (int i = 0; i < _listeners.Length; i++)
+        {
+        }
     }
 }
