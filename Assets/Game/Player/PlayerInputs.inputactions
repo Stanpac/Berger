@@ -728,6 +728,107 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "CamCheat",
+            "id": "41802f04-80a6-4f5c-88a4-326467cc0554",
+            "actions": [
+                {
+                    "name": "Activate Classic Cam",
+                    "type": "Button",
+                    "id": "1d16309e-89f7-4c53-b5d7-145480496f70",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Activate TopView Cam",
+                    "type": "Button",
+                    "id": "cd894faf-cb61-4036-bbab-14f42cf1ed86",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Activate SideView Cam",
+                    "type": "Button",
+                    "id": "c2f7c2d6-b63b-4936-9f22-c38d96ebf58b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d9ce5bd3-6362-40e1-88e9-bdcef9c144ba",
+                    "path": "<Keyboard>/numpad1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Activate Classic Cam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "699bf81e-4e3f-4ba0-8670-bac08ef39d42",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Activate Classic Cam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7fe544cf-5d17-4133-8751-76c5964ea94f",
+                    "path": "<Keyboard>/numpad2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Activate TopView Cam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "16e0830a-62aa-4bf9-bb7c-65a92f6661fc",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Activate TopView Cam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b7d71ffd-ac28-479b-b0d3-bab301d7c585",
+                    "path": "<Keyboard>/numpad3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Activate SideView Cam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "48f374e3-32f0-4459-bf99-b92490416a9f",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Activate SideView Cam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
