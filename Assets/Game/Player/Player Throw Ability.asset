@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player Throw Ability
   m_EditorClassIdentifier: 
   _entityCost: 2
-  _isCancellable: 0
+  _customTickRate: 0.2
   _throwStrength: 10
   _timeToReachMaxThrowDistance: 1
   _throwAngle: 50
@@ -22,4 +22,4 @@ MonoBehaviour:
   _projectileLayer:
     serializedVersion: 2
     m_Bits: 64
-  _lineResolution: 100
+  _lineResolution: 10
