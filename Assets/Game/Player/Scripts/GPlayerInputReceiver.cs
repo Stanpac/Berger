@@ -55,6 +55,46 @@ public class GPlayerInputReceiver : MonoBehaviour
         }
     }
     
+    public void OnAbilityTwo(InputAction.CallbackContext cbx)
+    {
+        if (_playerAbilitySystem == null) return;
+
+        if (cbx.started)
+        {
+            _playerAbilitySystem.StartAbility(1);
+        }
+        else if (cbx.canceled)
+        {
+            _playerAbilitySystem.CancelAbility(1);
+        }
+    }
+
+    public void OnAbilityThree(InputAction.CallbackContext cbx)
+    {
+        if (_playerAbilitySystem == null) return;
+
+        if (cbx.started)
+        {
+            _playerAbilitySystem.StartAbility(2);
+        }
+        else if (cbx.canceled)
+        {
+            _playerAbilitySystem.CancelAbility(2);
+        }
+    }
+    
+    public void OnInteraction(InputAction.CallbackContext cbx)
+    {
+        if (_playerAbilitySystem == null) return;
+
+        if (cbx.started)
+        {
+            _playerAbilitySystem.Interact();
+        }
+    }
+
+
+    
     private void Start()
     {
         _playerMovement = GetComponent<GPlayerMovement>();
