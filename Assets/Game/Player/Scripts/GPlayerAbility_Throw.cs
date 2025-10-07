@@ -16,6 +16,7 @@ public class GPlayerAbility_Throw : GPlayerAbility
     private Rigidbody _projectileRigidBody;
     private PlayerInput _playerInput;
     private LineRenderer _lineRenderer;
+    
 
     public override void OnStart(GPlayerAbilitySystem player)
     {

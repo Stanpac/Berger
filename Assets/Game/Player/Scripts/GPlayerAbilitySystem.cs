@@ -39,9 +39,11 @@ public class GPlayerAbilitySystem : MonoBehaviour
     
     private void Start()
     {
-        foreach (var ability in _abilities)
+        for (int i = 0; i < _abilities.Count; i++)
         {
-            ability.OnStart(this);
+            GPlayerAbility ability = _abilities[i];
+            _abilities[i] = ScriptableObject.Instantiate(ability);
+            _abilities[i].StartAbility();
         }
     }
 
