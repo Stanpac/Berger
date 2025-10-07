@@ -54,6 +54,7 @@ public class GEntityGathering : MonoBehaviour
     private GEntity[] GetNearEntities()
     {
         GEntity[] entities = GEntityManager.Instance.agents.Where(a=> 
+            a.gameObject.activeInHierarchy &&
             Vector3.Distance(transform.position, a.transform.position) <= _gatheringRange &&
             a._currentState != GEntity.EEntityState.InInventory).ToArray();
 

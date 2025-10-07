@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 4691154796349754717}
   - component: {fileID: 8450975155923205653}
   - component: {fileID: 4492375062468573812}
+  - component: {fileID: 190671548426546639}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -321,6 +322,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1838433932470857059}
+        m_TargetAssemblyTypeName: GPlayerInputReceiver, Assembly-CSharp
+        m_MethodName: OnAbilityOne
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 585ef35d-da18-4beb-aeb2-46d2c48ef34c
+    m_ActionName: Player/AbilityOne
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -376,6 +393,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d97ac2fec2cd548b613db5f9c3ac58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gatheringRange: 3
+  _gatheringRange: 1.5
   _isGizmosActive: 1
   _gizmosCircleResolution: 10
+--- !u!114 &190671548426546639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083325374250330489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc1bd36edebf379439735cd12137ddf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _abilities:
+  - {fileID: 11400000, guid: a9dc726553dee664e96f0d0aa7852682, type: 2}

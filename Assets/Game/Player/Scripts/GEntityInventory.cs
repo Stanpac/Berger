@@ -28,6 +28,16 @@ public class GEntityInventory : MonoBehaviour
         agents.Remove(agent);
     }
 
+    public void DeleteEntities(int entityCount)
+    {
+        for (int i = entityCount - 1; i >= 0; i--)
+        {
+            var agent = agents[i];
+            UnregisterEntity(agents[i]);
+            agent.gameObject.SetActive(false);
+        }
+    }
+
     private void Start()                                                       
     {
         agents = new List<GEntity>();

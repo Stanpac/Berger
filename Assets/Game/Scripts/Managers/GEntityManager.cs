@@ -34,14 +34,4 @@ public class GEntityManager : GSingleton<GEntityManager>
         }
         agents.Remove(agent);
     }
-
-    private void Update()
-    {
-        GEntity[] _listeners = GEntityManager.Instance.agents.Where(a=>
-            (Vector3.Distance(transform.position, a.transform.position)) < _agentsDetectionRange).ToArray();
-        
-        for (int i = 0; i < _listeners.Length; i++)
-        {
-        }
-    }
 }

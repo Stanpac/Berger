@@ -23,9 +23,9 @@ public class GNavMovement : MonoBehaviour
             }
             _movingEnum = MovementCoroutine(onComplete);
             StartCoroutine(_movingEnum);
-            Debug.Log($"{gameObject.name} Moving to position: " + targetPosition);
+            //Debug.Log($"{gameObject.name} Moving to position: " + targetPosition);
         } else {
-            Debug.LogWarning($"Failed to set destination to {targetPosition} in {gameObject.name}");
+            //Debug.LogWarning($"Failed to set destination to {targetPosition} in {gameObject.name}");
         }
     }
     
@@ -38,8 +38,7 @@ public class GNavMovement : MonoBehaviour
     IEnumerator MovementCoroutine(Action onComplete = null)
     {
         yield return new WaitUntil(() => _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance && !_navMeshAgent.pathPending);
-        Debug.Log($"{gameObject.name} Reached destination");
-        _entity.ChangeState(GEntity.EEntityState.Passive);
+        //Debug.Log($"{gameObject.name} Reached destination");
         onComplete?.Invoke();
         _movingEnum = null;
     }

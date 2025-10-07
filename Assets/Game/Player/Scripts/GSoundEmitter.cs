@@ -77,6 +77,7 @@ public class GSoundEmitter : MonoBehaviour
     private void BellTick()
     {
         GEntity[] nearEntities = GEntityManager.Instance.agents.Where(a=>
+            a.gameObject.activeInHierarchy &&
              a._currentState != GEntity.EEntityState.InInventory &&
              Vector3.Distance(transform.position, a.transform.position) < _bellRange).ToArray();
         

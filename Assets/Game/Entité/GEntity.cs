@@ -42,5 +42,6 @@ public class GEntity : SerializedMonoBehaviour
     {
         GEntityManager.Instance.RegisterEntity(this);
         _navMovement = GetComponent<GNavMovement>();
+        OnStateEnter();
     }
 }
