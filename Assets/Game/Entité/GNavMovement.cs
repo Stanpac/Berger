@@ -14,6 +14,8 @@ public class GNavMovement : MonoBehaviour
     private GEntity _entity;
     private IEnumerator _movingEnum;
     
+    public bool IsMoving => _movingEnum != null;
+    
     public void MoveTo(Vector3 targetPosition, Action onComplete = null)
     {
         if (_navMeshAgent.SetDestination(targetPosition)) 
@@ -24,9 +26,9 @@ public class GNavMovement : MonoBehaviour
             }
             _movingEnum = MovementCoroutine(onComplete);
             StartCoroutine(_movingEnum);
-            //Debug.Log($"{gameObject.name} Moving to position: " + targetPosition);
+            // Debug.Log($"{gameObject.name} Moving to position: " + targetPosition);
         } else {
-            //Debug.LogWarning($"Failed to set destination to {targetPosition} in {gameObject.name}");
+            // Debug.LogWarning($"Failed to set destination to {targetPosition} in {gameObject.name}");
         }
     }
     
