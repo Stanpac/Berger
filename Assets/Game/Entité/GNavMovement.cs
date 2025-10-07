@@ -16,7 +16,8 @@ public class GNavMovement : MonoBehaviour
     
     public void MoveTo(Vector3 targetPosition, Action onComplete = null)
     {
-        if (_navMeshAgent.SetDestination(targetPosition)) {
+        if (_navMeshAgent.SetDestination(targetPosition)) 
+        {
             if (_movingEnum != null)
             {
                 StopCoroutine(_movingEnum);
