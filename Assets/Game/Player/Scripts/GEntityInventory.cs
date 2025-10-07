@@ -48,12 +48,15 @@ public class GEntityInventory : MonoBehaviour
             agent.gameObject.SetActive(false);
         }
     }
-
-    private void Start()                                                       
+    
+    private void Awake()
     {
         agents = new List<GEntity>();
         _lastPositions = new List<Vector3>();
-        
+    }
+    
+    private void Start()                                                       
+    {
         _lastPositions.Add(transform.position);
     }
 

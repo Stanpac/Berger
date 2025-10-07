@@ -477,8 +477,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.19244462, y: -0.6868283, z: 0.19646275, w: 0.67278105}
-  m_LocalPosition: {x: 19.64, y: 14, z: -0.01}
+  m_LocalRotation: {x: -0.41239592, y: 0.58076286, z: -0.5512481, w: -0.43447638}
+  m_LocalPosition: {x: 0.2, y: 30.3, z: -0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2063,6 +2063,10 @@ PrefabInstance:
     - target: {fileID: 153264167552542595, guid: 1375acf6938047b4ca0bc5cbb93c6bc3, type: 3}
       propertyPath: m_ActionEvents.Array.data[15].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: Unity.Cinemachine.CinemachineCamera, Unity.Cinemachine
+      objectReference: {fileID: 0}
+    - target: {fileID: 190671548426546639, guid: 1375acf6938047b4ca0bc5cbb93c6bc3, type: 3}
+      propertyPath: _abilities.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 203273787656568836, guid: 1375acf6938047b4ca0bc5cbb93c6bc3, type: 3}
       propertyPath: m_LocalPosition.x
