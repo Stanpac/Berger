@@ -30,7 +30,7 @@ public class GPlayerAbility_Throw : GPlayerAbility_Async
     {
         base.OnAbilityStarted();
         _projectileRigidBody = GameObject.Instantiate(
-            _projectilePrefab, _inventory.transform.position + _projectileSpawnPositionOffset, _inventory.transform.rotation).GetComponent<Rigidbody>();
+            _projectilePrefab, _inventory.transform.position + _projectileSpawnPositionOffset, _inventory.transform.rotation, _inventory.transform).GetComponent<Rigidbody>();
     }
 
     protected override void ProcessEntities()
@@ -113,6 +113,7 @@ public class GPlayerAbility_Throw : GPlayerAbility_Async
     
     protected virtual void ApplyForce()
     {
+        _projectileRigidBody.transform.parent = null;
         _lineRenderer.positionCount = 0;
         _projectileRigidBody.isKinematic = false;
         _projectileRigidBody.GetComponent<Collider>().isTrigger = false;
