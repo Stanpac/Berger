@@ -30,7 +30,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8556324438475379317}
   m_Father: {fileID: 203273787656568836}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1576867360344112713
@@ -64,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 80162af7c7364cb468b8171fa8e5998c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135,6 +136,8 @@ GameObject:
   - component: {fileID: 4492375062468573812}
   - component: {fileID: 190671548426546639}
   - component: {fileID: 4859918163772422451}
+  - component: {fileID: 3096740860184134792}
+  - component: {fileID: 8169182980922698661}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -174,6 +177,8 @@ MonoBehaviour:
   _speed: 5
   _acceleration: 0.3
   _deceleration: 0.1
+  _gravityMultiplier: 1
+  _rotationSpeed: 3
 --- !u!114 &4984682855161631574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,52 +346,67 @@ MonoBehaviour:
     m_ActionName: Player/AbilityOne
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1838433932470857059}
-        m_TargetAssemblyTypeName: GPlayerInputReceiver, Assembly-CSharp
-        m_MethodName: OnAbilityTwo
-        m_Mode: 0
+      - m_Target: {fileID: 3096740860184134792}
+        m_TargetAssemblyTypeName: GCamCheat, Assembly-CSharp
+        m_MethodName: SwitchCamera
+        m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: Unity.Cinemachine.CinemachineCamera,
+            Unity.Cinemachine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: de1f358b-9784-4cf3-9b14-0dba5db99524
-    m_ActionName: Player/Interaction
+    m_ActionId: 1d16309e-89f7-4c53-b5d7-145480496f70
+    m_ActionName: CamCheat/New action
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1838433932470857059}
-        m_TargetAssemblyTypeName: GPlayerInputReceiver, Assembly-CSharp
-        m_MethodName: OnAbilityThree
-        m_Mode: 0
+      - m_Target: {fileID: 3096740860184134792}
+        m_TargetAssemblyTypeName: GCamCheat, Assembly-CSharp
+        m_MethodName: SwitchCamera
+        m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: Unity.Cinemachine.CinemachineCamera,
+            Unity.Cinemachine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+    m_ActionId: cd894faf-cb61-4036-bbab-14f42cf1ed86
+    m_ActionName: 'CamCheat/Activate TopView Cam[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3096740860184134792}
+        m_TargetAssemblyTypeName: GCamCheat, Assembly-CSharp
+        m_MethodName: SwitchCamera
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: Unity.Cinemachine.CinemachineCamera,
+            Unity.Cinemachine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c2f7c2d6-b63b-4936-9f22-c38d96ebf58b
+    m_ActionName: 'CamCheat/Activate SideView Cam[/Keyboard/3]'
+  - m_PersistentCalls:
+      m_Calls: []
     m_ActionId: 6ad2f16d-5f04-45f9-b0b8-8bf07fa29975
     m_ActionName: 'Player/AbilityTwo[/Keyboard/2,/XInputControllerWindows/buttonEast]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1838433932470857059}
-        m_TargetAssemblyTypeName: GPlayerInputReceiver, Assembly-CSharp
-        m_MethodName: OnInteraction
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: aaff0521-7ba3-422c-96b6-0fa5f50c56cb
     m_ActionName: 'Player/AbilityThree[/Keyboard/3,/XInputControllerWindows/buttonSouth]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: de1f358b-9784-4cf3-9b14-0dba5db99524
+    m_ActionName: 'Player/Interaction[/Keyboard/e,/XInputControllerWindows/buttonWest]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -430,6 +450,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <agents>k__BackingField: []
+  _lastPositions: []
+  lastPositionMaxCount: 15
+  minDistanceToRecord: 0.2
+  timebetweenRecords: 0.1
+  _timeSinceLastRecord: 0
 --- !u!114 &4492375062468573812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,6 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _abilities:
   - {fileID: 11400000, guid: a9dc726553dee664e96f0d0aa7852682, type: 2}
+  _interactableAbilities: []
 --- !u!120 &4859918163772422451
 LineRenderer:
   serializedVersion: 2
@@ -504,9 +530,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -566,3 +590,119 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &3096740860184134792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083325374250330489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9817cb78ab7665e4596b7ef3c3729e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartCam: {fileID: 0}
+  cinemachineBrain: {fileID: 0}
+--- !u!208 &8169182980922698661
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083325374250330489}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.2, y: 1, z: 0.2}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!1 &7665116585819143922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8556324438475379317}
+  - component: {fileID: 5164756059920221100}
+  - component: {fileID: 4103742619131020154}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8556324438475379317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7665116585819143922}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.2099, y: 0.362, z: 0.5621}
+  m_LocalScale: {x: 0.5801, y: 0.2644, z: 0.3441}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3962852257785825661}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5164756059920221100
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7665116585819143922}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &4103742619131020154
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7665116585819143922}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 1763e4df300ed4640add8357023b81ac, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}

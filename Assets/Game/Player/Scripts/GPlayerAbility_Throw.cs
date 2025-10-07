@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [CreateAssetMenu(fileName = "Player Throw Ability", menuName = "Ability/ThrowAbility")]
-public class GPlayerAbility_Throw : GPlayerAbility
+public class GPlayerAbility_Throw : GPlayerAbility_Async
 {
     [SerializeField] protected float _throwStrength;
     [SerializeField] protected float _timeToReachMaxThrowDistance;
@@ -16,7 +16,8 @@ public class GPlayerAbility_Throw : GPlayerAbility
     private Rigidbody _projectileRigidBody;
     private PlayerInput _playerInput;
     private LineRenderer _lineRenderer;
-    
+
+    protected override bool IsPhysicsTickEnabled() => true;
 
     public override void OnStart(GPlayerAbilitySystem player)
     {
@@ -38,9 +39,9 @@ public class GPlayerAbility_Throw : GPlayerAbility
         base.ProcessEntities();
     }
     
-    protected override void OnAbilityTick()
+    protected override void OnAbilityPhysicsTick()
     {
-        base.OnAbilityTick();
+        base.OnAbilityPhysicsTick();
         AbilityPreview();
     }
 
@@ -78,7 +79,7 @@ public class GPlayerAbility_Throw : GPlayerAbility
             currentPosition = newPosition;
             if (points.Count > 1)
             {
-                Debug.DrawLine(points.Last(), points[points.Count - 2], Color.black, 2);
+                //Debug.DrawLine(points.Last(), points[points.Count - 2], Color.black, 2);
             }
         }
         _lineRenderer.positionCount = points.Count;

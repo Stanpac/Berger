@@ -29,13 +29,13 @@ public class GPlayerAbilitySystem : MonoBehaviour
 
     public void CancelAbility(int abilityIndex)
     {        
-        if (_abilities.Count <= abilityIndex)
+        GPlayerAbility_Async asyncAbility = _abilities[abilityIndex] as GPlayerAbility_Async;
+        if (_abilities.Count <= abilityIndex && asyncAbility == null)
         {
             return;
         }
-        _abilities[abilityIndex].CancelAbility();
+        asyncAbility.CancelAbility();
     }
-
     
     private void Start()
     {
@@ -43,7 +43,7 @@ public class GPlayerAbilitySystem : MonoBehaviour
         {
             GPlayerAbility ability = _abilities[i];
             _abilities[i] = ScriptableObject.Instantiate(ability);
-            _abilities[i].StartAbility();
+            _abilities[i].OnStart(this);
         }
     }
 
