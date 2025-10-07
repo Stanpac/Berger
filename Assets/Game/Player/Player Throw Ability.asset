@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae280d5040524cda925ef5641c3293ba, type: 3}
   m_Name: Player Throw Ability
   m_EditorClassIdentifier: 
-  _entityCost: 0
+  _entityCost: 2
   _isCancellable: 0
   _throwStrength: 10
   _timeToReachMaxThrowDistance: 1
-  _throwAngle: 25
+  _throwAngle: 50
   _projectilePrefab: {fileID: 7048620620445642068, guid: 9aa6f993704e5a244a227d4fb0efa6a1, type: 3}
-  _projectileSpawnPositionOffset: {x: 0, y: 0, z: 0}
+  _projectileSpawnPositionOffset: {x: 0, y: 1.5, z: 0.2}
   _projectileLayer:
     serializedVersion: 2
     m_Bits: 64
