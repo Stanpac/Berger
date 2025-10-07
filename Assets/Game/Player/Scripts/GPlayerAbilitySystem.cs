@@ -6,7 +6,17 @@ using UnityEngine;
 public class GPlayerAbilitySystem : MonoBehaviour
 {
     [SerializeField] private List<GPlayerAbility> _abilities;
-
+    [SerializeField, ReadOnly] private List<GInteractable> _interactableAbilities;
+    private List<GPlayerAbility> _playerAbilitiesInstances;
+    
+    public void Interact()
+    {
+        if (_interactableAbilities.Count > 0)
+        {
+            
+        }
+    }
+    
     public void StartAbility(int abilityIndex)
     {
         if (_abilities.Count <= abilityIndex)
@@ -26,11 +36,36 @@ public class GPlayerAbilitySystem : MonoBehaviour
         _abilities[abilityIndex].CancelAbility();
     }
 
+    
     private void Start()
     {
         foreach (var ability in _abilities)
         {
             ability.OnStart(this);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Interactable"))
+        {
+            var interactable = other.GetComponentInParent<GInteractable>();
+            if (interactable != null && !_interactableAbilities.Contains(interactable))
+            {
+                _interactableAbilities.Add(interactable);
+            }
+        }
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Interactable"))
+        {
+            var interactable = other.GetComponentInParent<GInteractable>();
+            if (interactable != null && _interactableAbilities.Contains(interactable))
+            {
+                _interactableAbilities.Remove(interactable);
+            }
         }
     }
 }
