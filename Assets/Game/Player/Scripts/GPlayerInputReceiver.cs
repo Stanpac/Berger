@@ -6,6 +6,7 @@ public class GPlayerInputReceiver : MonoBehaviour
 {
     private GPlayerMovement _playerMovement;
     private GSoundEmitter _soundEmitter;
+    private GPlayerAbilitySystem _playerAbilitySystem;
     
     public void OnTriggerBell(InputAction.CallbackContext cbx)
     {
@@ -40,9 +41,24 @@ public class GPlayerInputReceiver : MonoBehaviour
         _playerMovement.inputMovementDirection = movementDirection;
     }
 
+    public void OnAbilityOne(InputAction.CallbackContext cbx)
+    {
+        if (_playerAbilitySystem == null) return;
+
+        if (cbx.started)
+        {
+            _playerAbilitySystem.StartAbility(0);
+        }
+        else if (cbx.canceled)
+        {
+            _playerAbilitySystem.CancelAbility(0);
+        }
+    }
+    
     private void Start()
     {
         _playerMovement = GetComponent<GPlayerMovement>();
         _soundEmitter = GetComponent<GSoundEmitter>();
+        _playerAbilitySystem = GetComponent<GPlayerAbilitySystem>();
     }
 }

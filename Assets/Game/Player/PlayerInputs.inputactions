@@ -23,6 +23,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "AbilityOne",
+                    "type": "Button",
+                    "id": "585ef35d-da18-4beb-aeb2-46d2c48ef34c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -177,6 +186,28 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "TriggerBell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "44e8d237-9c59-4aad-9242-a4faab27f768",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "AbilityOne",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3d63f7d5-c55c-4816-8b5b-6375d37bd09d",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "AbilityOne",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
