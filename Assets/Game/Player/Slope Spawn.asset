@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19bcb67965040cda1f547294669cdce, type: 3}
   m_Name: Slope Spawn
   m_EditorClassIdentifier: 
-  _entityCost: 1
+  _entityCost: 2
   _itemPrefab: {fileID: 8590931262025760175, guid: 02d0ba4ed461f2d4b8dd04da98cd9423, type: 3}
   _spawnPositionOffset: {x: 0, y: -1, z: 1.5}
