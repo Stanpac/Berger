@@ -41,6 +41,14 @@ public class GPlayerInputReceiver : MonoBehaviour
         _playerMovement.inputMovementDirection = movementDirection;
     }
 
+    public void OnJump(InputAction.CallbackContext cbx)
+    {
+        if (cbx.started)
+        {
+            _playerMovement.Jump();
+        }
+    }
+    
     public void OnAbilityOne(InputAction.CallbackContext cbx)
     {
         if (_playerAbilitySystem == null) return;
@@ -82,6 +90,21 @@ public class GPlayerInputReceiver : MonoBehaviour
             _playerAbilitySystem.CancelAbility(2);
         }
     }
+    
+    public void OnAbilityFour(InputAction.CallbackContext cbx)
+    {
+        if (_playerAbilitySystem == null) return;
+
+        if (cbx.started)
+        {
+            _playerAbilitySystem.StartAbility(3);
+        }
+        else if (cbx.canceled)
+        {
+            _playerAbilitySystem.CancelAbility(3);
+        }
+    }
+
     
     public void OnInteraction(InputAction.CallbackContext cbx)
     {

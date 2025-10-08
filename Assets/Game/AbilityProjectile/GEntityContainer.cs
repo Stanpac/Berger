@@ -10,15 +10,19 @@ public class GEntityContainer : MonoBehaviour
     {
         _bufferedEntities = bufferedEntities;
     }
-    
-    private void OnCollisionEnter(Collision other)
+
+    public void ReleaseContainer()
     {
-        foreach (var entity in _bufferedEntities)
+        if (_bufferedEntities != null && _bufferedEntities.Count > 0)
         {
-            entity.transform.position = transform.position;
-            entity.gameObject.SetActive(true);
-            entity.ChangeState(GEntity.EEntityState.Passive);
+            foreach (var entity in _bufferedEntities)
+            {
+                entity.transform.position = transform.position;
+                entity.gameObject.SetActive(true);
+                entity.ChangeState(GEntity.EEntityState.Passive);
+            }
         }
         Destroy(gameObject);
     }
+
 }
