@@ -10,6 +10,7 @@ public class GEntityGathering : MonoBehaviour
     [SerializeField] private float _gatheringRange;
     [SerializeField, BoxGroup("GIZMOS")] private bool _isGizmosActive = true;
     [SerializeField, BoxGroup("GIZMOS")] private int _gizmosCircleResolution;
+    [SerializeField, BoxGroup("GIZMOS")] private Transform _gizmosGatherTransform;
     private GEntityInventory _inventory;
     private Vector3[] _gizmosCircleArraySize;
     
@@ -39,6 +40,7 @@ public class GEntityGathering : MonoBehaviour
                 _gizmosCircleArraySize[i] = new Vector3(x, center.y, z);
             }
             Gizmos.DrawLineStrip(_gizmosCircleArraySize, true);
+            _gizmosGatherTransform.localScale = Vector3.one * _gatheringRange * 12.5f;
         }
     }
 
