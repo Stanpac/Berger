@@ -16,8 +16,8 @@ public abstract class GPlayerAbility : ScriptableObject
     {
         if (_entityCost <= _inventory.agents.Count)
         {
-            ProcessEntities();
             OnAbilityStarted();
+            ProcessEntities();
             return true;
         }
 
@@ -36,10 +36,5 @@ public abstract class GPlayerAbility : ScriptableObject
             _inventory.DeleteEntities(_entityCost);
         }
     }
-    
-}
-
-public class GPlayerAbility_SpawnItem : GPlayerAbility
-{
     
 }

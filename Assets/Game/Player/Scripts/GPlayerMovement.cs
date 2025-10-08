@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -9,11 +10,22 @@ public class GPlayerMovement : MonoBehaviour
     [SerializeField] private float _acceleration, _deceleration;
     [SerializeField] private float _gravityMultiplier;
     [SerializeField] private float _rotationSpeed;
+    [SerializeField] private float _jumpStrength;
+    [SerializeField] private float _groundAngleLimit;
+    [SerializeField, ReadOnly] private bool _isGrounded;
     private Vector3 _currentMovementDirection;
     private float _currentAcceleration;
-    private Vector3 _currentVelocity;
+    [SerializeField, ReadOnly] private Vector3 _currentVelocity;
     private CharacterController _characterController;
 
+    public void Jump()
+    {
+        if (_isGrounded)
+        {
+            _characterController.Move(Vector3.up * _jumpStrength);
+        }
+    }
+    
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
@@ -21,6 +33,7 @@ public class GPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        _isGrounded = Physics.CheckSphere(transform.position - Vector3.up * transform.localScale.y, .2f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore);
         ComputeHorizontalMovement();
         ComputeGravity();
         ApplyMovement();
@@ -29,7 +42,7 @@ public class GPlayerMovement : MonoBehaviour
 
     private void ComputeGravity()
     {
-        float velocityY = _characterController.isGrounded ? 0 : _currentVelocity.y + _gravityMultiplier * Physics.gravity.y * Time.fixedDeltaTime;
+        float velocityY = _isGrounded ? 0 : _currentVelocity.y + _gravityMultiplier * Physics.gravity.y * Time.fixedDeltaTime;
         _currentVelocity.y = velocityY;
     }
 
@@ -62,5 +75,10 @@ public class GPlayerMovement : MonoBehaviour
         if (_currentMovementDirection == Vector3.zero) return;
         Quaternion toRotation = Quaternion.LookRotation(_currentMovementDirection, Vector3.up);
         transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, _rotationSpeed * Time.fixedDeltaTime);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawSphere(transform.position - Vector3.up * transform.localScale.y, .2f);
     }
 }
