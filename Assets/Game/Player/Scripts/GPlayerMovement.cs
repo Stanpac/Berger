@@ -11,17 +11,16 @@ public class GPlayerMovement : MonoBehaviour
     [SerializeField] private float _gravityMultiplier;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _jumpStrength;
-    [SerializeField] private float _groundAngleLimit;
+    [FormerlySerializedAs("_groundAngleLimit")] [SerializeField] private float _groundCheckSize;
     [SerializeField, ReadOnly] private bool _isGrounded;
     private Vector3 _currentMovementDirection;
     private float _currentAcceleration;
     [SerializeField, ReadOnly] private Vector3 _currentVelocity;
     private CharacterController _characterController;
-    
-    // cinemachine Needs these hooks to work properly
-    public Action PreUpdate;
-    public Action<Vector3, float> PostUpdate;
 
+    private Transform _currentPlatform;
+    private Vector3 _lastPlatformPosition;
+    
     public void Jump()
     {
         if (_isGrounded)
@@ -37,8 +36,10 @@ public class GPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _isGrounded = Physics.CheckSphere(transform.position - Vector3.up * transform.localScale.y, .2f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore);
+        _isGrounded = Physics.CheckSphere(transform.position - Vector3.up * transform.localScale.y, _groundCheckSize, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore);
+        //_isGrounded = _characterController.isGrounded;
         ComputeHorizontalMovement();
+        HandlePlatformMovement();
         ComputeGravity();
         ApplyMovement();
         Rotate();
@@ -73,6 +74,42 @@ public class GPlayerMovement : MonoBehaviour
         _characterController.Move(_currentVelocity);
     }
 
+    void HandlePlatformMovement()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, _characterController.height / 2 + 0.3f, LayerMask.GetMask("Ground")))
+        {
+            // Check if we're on a moving/animated platform
+            Transform hitTransform = hit.collider.transform;
+            
+            if (_currentPlatform != hitTransform)
+            {
+                _currentPlatform = hitTransform;
+                if (_currentPlatform != null)
+                {
+                    _lastPlatformPosition = _currentPlatform.position;
+                }
+            }
+        }
+        else
+        {
+            _currentPlatform = null;
+        }
+        
+        if (_currentPlatform != null && _isGrounded)
+        {
+            // Calculate platform movement
+            Vector3 platformDelta = _currentPlatform.position - _lastPlatformPosition;
+            
+            // Move the character controller with the platform
+            _characterController.Move(platformDelta);
+            
+            // Update last platform position
+            _lastPlatformPosition = _currentPlatform.position;
+        }
+    }
+
+    
     private void Rotate()
     {
         _currentMovementDirection.y = 0;
@@ -83,6 +120,6 @@ public class GPlayerMovement : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawSphere(transform.position - Vector3.up * transform.localScale.y, .2f);
+        Gizmos.DrawSphere(transform.position - Vector3.up * transform.localScale.y, _groundCheckSize);
     }
 }
