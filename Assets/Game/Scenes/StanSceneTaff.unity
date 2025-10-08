@@ -308,6 +308,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1337417471675257582, guid: ec46ebe462d0c3c428cd05b5b102b2fd, type: 3}
+      propertyPath: m_ControllerManager.Controllers.Array.data[0].Input.InputAction
+      value: 
+      objectReference: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - target: {fileID: 1337417471675257582, guid: ec46ebe462d0c3c428cd05b5b102b2fd, type: 3}
+      propertyPath: m_ControllerManager.Controllers.Array.data[1].Input.InputAction
+      value: 
+      objectReference: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - target: {fileID: 1337417471675257582, guid: ec46ebe462d0c3c428cd05b5b102b2fd, type: 3}
       propertyPath: m_ControllerManager.Controllers.Array.data[4].Input.InputAction
       value: 
       objectReference: {fileID: -5630151704836100654, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
@@ -776,7 +784,7 @@ MonoBehaviour:
       Owner: {fileID: 302874845}
       Enabled: 1
       Input:
-        InputAction: {fileID: 2969018679571953300, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+        InputAction: {fileID: 2124836366339707734, guid: 052faaac586de48259a63d0c4782560b, type: 3}
         Gain: 1
         LegacyInput: Cancel
         LegacyGain: 1
@@ -2049,11 +2057,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5842233211769696759, guid: 794c7ca9d11f07b46a79506b9e4312bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5000019
+      value: 0.22
       objectReference: {fileID: 0}
     - target: {fileID: 5842233211769696759, guid: 794c7ca9d11f07b46a79506b9e4312bf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.31
+      value: -1.35
       objectReference: {fileID: 0}
     - target: {fileID: 5842233211769696759, guid: 794c7ca9d11f07b46a79506b9e4312bf, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2531,9 +2539,9 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.1
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: bd7add6580352084a868263705bf5e47, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: fce01149e542baf44bda0be0cffc139f, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &2120097397 stripped
 Transform:
