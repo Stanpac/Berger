@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 8274d0e2f9743b0439125ee19f6d06d4
+<<<<<<<< HEAD:Assets/Game/Scenes/AndreScena/NavMesh-Cube.asset.meta
+guid: 0990c1c077672df4a84358e56b10727a
+========
+guid: bd7add6580352084a868263705bf5e47
+>>>>>>>> 0b06246 (Set up cam 3eme person):Assets/Game/Scenes/StanSceneTaff/NavMesh-Ground.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 23800000

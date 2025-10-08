@@ -17,6 +17,10 @@ public class GPlayerMovement : MonoBehaviour
     private float _currentAcceleration;
     [SerializeField, ReadOnly] private Vector3 _currentVelocity;
     private CharacterController _characterController;
+    
+    // cinemachine Needs these hooks to work properly
+    public Action PreUpdate;
+    public Action<Vector3, float> PostUpdate;
 
     public void Jump()
     {

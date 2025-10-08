@@ -44,12 +44,12 @@ public class GEntity : SerializedMonoBehaviour
         
         if (_currentState == GEntity.EEntityState.Passive)
         {
-            _navMeshAgent.speed = 1.5f;
+            _navMeshAgent.speed = _passiveSpeed;
         }
         
         if (_currentState == GEntity.EEntityState.Charmed)
         {
-            _navMeshAgent.speed = 3.5f;
+            _navMeshAgent.speed = _charmedSpeed;
         }
     }
 
@@ -72,12 +72,12 @@ public class GEntity : SerializedMonoBehaviour
 
     private void Update()
     {
-        if (_currentState == EEntityState.Passive && !_navMovement.IsMoving)
+        /*if (_currentState == EEntityState.Passive && !_navMovement.IsMoving)
         {
             // Add Random Minor movement near
             Vector3 CurrentPosition = transform.position;
             CurrentPosition += new Vector3(UnityEngine.Random.Range(-1f, 1f), 0, UnityEngine.Random.Range(-1f, 1f));
             _navMovement.MoveTo(CurrentPosition);
-        }
+        }*/
     }
 }
