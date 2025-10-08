@@ -166,8 +166,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
   <_currentState>k__BackingField: 0
-  _passiveSpeed: 1.5
-  _charmedSpeed: 3.5
+  _passiveSpeed: 5
+  _charmedSpeed: 6
 --- !u!33 &2245459541832541204
 MeshFilter:
   m_ObjectHideFlags: 0
