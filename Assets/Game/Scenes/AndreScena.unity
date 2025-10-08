@@ -1874,6 +1874,14 @@ PrefabInstance:
       propertyPath: cinemachineBrain
       value: 
       objectReference: {fileID: 330585548}
+    - target: {fileID: 3282000723992768996, guid: 1375acf6938047b4ca0bc5cbb93c6bc3, type: 3}
+      propertyPath: _groundCheckSize
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282000723992768996, guid: 1375acf6938047b4ca0bc5cbb93c6bc3, type: 3}
+      propertyPath: _groundAngleLimit
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7083325374250330489, guid: 1375acf6938047b4ca0bc5cbb93c6bc3, type: 3}
       propertyPath: m_Name
       value: Player
