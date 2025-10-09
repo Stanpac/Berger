@@ -44,7 +44,7 @@ public class GSoundEmitter : MonoBehaviour
         _gizmosCircleArraySize = new Vector3[_gizmosCircleResolution];
     }
 
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         if (_isGizmosActive && _gizmosCircleArraySize != null && _gizmosCircleArraySize.Length > 0)
         {
@@ -77,6 +77,48 @@ public class GSoundEmitter : MonoBehaviour
 
             Gizmos.color = Color.blue;
             Gizmos.DrawLineStrip(_gizmosCircleArraySize, true);
+            _gizmosBellRingTransform.localScale = _gizmosAnimRadius * 12.5f * Vector3.one;
+        }
+        else
+        {
+            _gizmosBellRingTransform.gameObject.SetActive(false);
+            _gizmosBellTransform.gameObject.SetActive(false);
+        }
+    }*/
+
+    private void Update()
+    {
+        if (_isGizmosActive && _gizmosCircleArraySize != null && _gizmosCircleArraySize.Length > 0)
+        {
+            float angleStep = 360f / (_gizmosCircleResolution);
+            for (int i = 0; i < _gizmosCircleResolution; i++)
+            {
+                Vector3 center = transform.position + Vector3.up * _gizmosOffsetHeight;
+                float angle = i * angleStep * Mathf.Deg2Rad;
+                float x = center.x + _bellRange * Mathf.Cos(angle);
+                float z = center.z + _bellRange * Mathf.Sin(angle);
+                _gizmosCircleArraySize[i] = new Vector3(x, center.y, z);
+            }
+            //Gizmos.DrawLineStrip(_gizmosCircleArraySize, true);
+            _gizmosBellTransform.localScale = _bellRange * 12.5f * Vector3.one;
+        }
+
+        if (_isGizmosActive && _gizmosCircleArraySize != null && _bellEnum != null && _gizmosCircleArraySize.Length > 0)
+        {
+            _gizmosBellRingTransform.gameObject.SetActive(true);
+            _gizmosBellTransform.gameObject.SetActive(true);
+            float angleStep = 360f / (_gizmosCircleResolution);
+            for (int i = 0; i < _gizmosCircleResolution; i++)
+            {
+                Vector3 center = transform.position + Vector3.up * _gizmosOffsetHeight;
+                float angle = i * angleStep * Mathf.Deg2Rad;
+                float x = center.x + _gizmosAnimRadius * Mathf.Cos(angle);
+                float z = center.z + _gizmosAnimRadius * Mathf.Sin(angle);
+                _gizmosCircleArraySize[i] = new Vector3(x, center.y, z);
+            }
+
+            //Gizmos.color = Color.blue;
+            //Gizmos.DrawLineStrip(_gizmosCircleArraySize, true);
             _gizmosBellRingTransform.localScale = _gizmosAnimRadius * 12.5f * Vector3.one;
         }
         else

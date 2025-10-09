@@ -25,7 +25,8 @@ public class GPlayerMovement : MonoBehaviour
     {
         if (_isGrounded)
         {
-            _characterController.Move(Vector3.up * _jumpStrength);
+            // Set upward velocity instead of moving directly
+            _currentVelocity.y = _jumpStrength;
         }
     }
     
@@ -37,7 +38,6 @@ public class GPlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         _isGrounded = Physics.CheckSphere(transform.position - Vector3.up * transform.localScale.y, _groundCheckSize, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore);
-        //_isGrounded = _characterController.isGrounded;
         ComputeHorizontalMovement();
         HandlePlatformMovement();
         ComputeGravity();
@@ -47,8 +47,16 @@ public class GPlayerMovement : MonoBehaviour
 
     private void ComputeGravity()
     {
-        float velocityY = _isGrounded ? 0 : _currentVelocity.y + _gravityMultiplier * Physics.gravity.y * Time.fixedDeltaTime;
-        _currentVelocity.y = velocityY;
+        if (_isGrounded && _currentVelocity.y < 0)
+        {
+            // Small downward force to keep grounded
+            _currentVelocity.y = -2f;
+        }
+        else
+        {
+            // Apply gravity
+            _currentVelocity.y += _gravityMultiplier * Physics.gravity.y * Time.fixedDeltaTime;
+        }
     }
 
     private void ComputeHorizontalMovement()
@@ -64,9 +72,11 @@ public class GPlayerMovement : MonoBehaviour
             _acceleration;
         
         _currentAcceleration = Mathf.Clamp(_currentAcceleration + accelerationMult / accelerationMagnitude * Time.fixedDeltaTime, 0, 1);
-        float velocityY = _currentVelocity.y;
-        _currentVelocity = _currentMovementDirection * (_speed * _currentAcceleration * Time.fixedDeltaTime);
-        _currentVelocity.y = velocityY;
+        
+        // Don't overwrite velocity.y here
+        Vector3 horizontalVelocity = _currentMovementDirection * (_speed * _currentAcceleration * Time.fixedDeltaTime);
+        _currentVelocity.x = horizontalVelocity.x;
+        _currentVelocity.z = horizontalVelocity.z;
     }
 
     private void ApplyMovement()
@@ -79,7 +89,6 @@ public class GPlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, _characterController.height / 2 + 0.3f, LayerMask.GetMask("Ground")))
         {
-            // Check if we're on a moving/animated platform
             Transform hitTransform = hit.collider.transform;
             
             if (_currentPlatform != hitTransform)
@@ -98,17 +107,11 @@ public class GPlayerMovement : MonoBehaviour
         
         if (_currentPlatform != null && _isGrounded)
         {
-            // Calculate platform movement
             Vector3 platformDelta = _currentPlatform.position - _lastPlatformPosition;
-            
-            // Move the character controller with the platform
             _characterController.Move(platformDelta);
-            
-            // Update last platform position
             _lastPlatformPosition = _currentPlatform.position;
         }
     }
-
     
     private void Rotate()
     {

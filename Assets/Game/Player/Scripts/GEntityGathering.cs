@@ -23,8 +23,25 @@ public class GEntityGathering : MonoBehaviour
     private void Update()
     {
         AddEntitiesToInventory();
+        if (_isGizmosActive && _gizmosCircleArraySize != null && _gizmosCircleArraySize.Length > 0)
+        {
+            Gizmos.color = Color.yellow;
+            float angleStep = 360f / (_gizmosCircleResolution);
+            for (int i = 0; i < _gizmosCircleResolution; i++)
+            {
+                Vector3 center = transform.position + Vector3.up * _gizmosOffsetHeight;
+                float angle = i * angleStep * Mathf.Deg2Rad;
+                float x = center.x + _gatheringRange * Mathf.Cos(angle);
+                float z = center.z + _gatheringRange * Mathf.Sin(angle);
+                _gizmosCircleArraySize[i] = new Vector3(x, center.y, z);
+            }
+           // Gizmos.DrawLineStrip(_gizmosCircleArraySize, true);
+            _gizmosGatherTransform.localScale = Vector3.one * _gatheringRange * 12.5f;
+        }
     }
 
+    
+    /*
     private void OnDrawGizmos()
     {
         if (_isGizmosActive && _gizmosCircleArraySize != null && _gizmosCircleArraySize.Length > 0)
@@ -43,6 +60,7 @@ public class GEntityGathering : MonoBehaviour
             _gizmosGatherTransform.localScale = Vector3.one * _gatheringRange * 12.5f;
         }
     }
+    */
 
     private void AddEntitiesToInventory()
     {
